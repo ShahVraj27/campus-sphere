@@ -4,7 +4,7 @@
 
 ```
 backend/
-├── campus_sphere/             # Main Django project folder
+├── campus_sphere/             # Main Django project-folder
 │   ├── __init__.py
 │   ├── asgi.py
 │   ├── settings.py            # Project settings
