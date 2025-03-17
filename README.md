@@ -27,7 +27,7 @@ Campus Sphere is a comprehensive campus management and social networking platfor
 - **React Router**: For application navigation
 - **Context API**: State management
 
-### Deployment
+### Deployment(optional)
 - **Docker**: Containerization for consistent development and deployment
 - **Docker Compose**: Multi-container application orchestration
 
@@ -64,13 +64,13 @@ Campus Sphere is a comprehensive campus management and social networking platfor
    git clone https://github.com/yourusername/campus-sphere.git
    cd campus-sphere
    ```
-
-2. Start the application using Docker Compose:
+### Setup using docker
+1. Start the application using Docker Compose:(Not Sure of its working)
    ```bash
    docker-compose up
    ```
 
-3. Access the application:
+2. Access the application:
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:8000/api
    - Admin interface: http://localhost:8000/admin
@@ -85,29 +85,85 @@ Campus Sphere is a comprehensive campus management and social networking platfor
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
+   Before starting, make sure you have the following files in your project:
 
-2. Install dependencies:
+2. Create manage.py in backend/ directory:
+   ```bash
+   #!/usr/bin/env python
+"""Django's command-line utility for administrative tasks."""
+import os
+import sys
+
+def main():
+    """Run administrative tasks."""
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'campus_sphere.settings')
+    try:
+        from django.core.management import execute_from_command_line
+    except ImportError as exc:
+        raise ImportError(
+            "Couldn't import Django. Are you sure it's installed and "
+            "available on your PYTHONPATH environment variable? Did you "
+            "forget to activate a virtual environment?"
+        ) from exc
+    execute_from_command_line(sys.argv)
+
+if __name__ == '__main__':
+    main()
+   ```
+
+3. Create wsgi.py in backend/campus_sphere/ directory:
+   ```bash
+      """
+   WSGI config for campus_sphere project.
+   """
+
+   import os
+   from django.core.wsgi import get_wsgi_application
+
+   os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'campus_sphere.settings')
+   application = get_wsgi_application()
+   ```
+4. Create asgi.py in backend/campus_sphere/ directory:
+   ```bash
+   """
+   ASGI config for campus_sphere project.
+   """
+
+   import os
+   from django.core.asgi import get_asgi_application
+
+   os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'campus_sphere.settings')
+   application = get_asgi_application()
+      ```
+5. Create .env file in backend/ directory:
+   DEBUG=True
+   SECRET_KEY=your-secret-development-key
+   DB_NAME=campus_sphere
+   DB_USER=campus_user
+   DB_PASSWORD=campus_password
+   DB_HOST=localhost
+   DB_PORT=3306
+
+6. Install dependencies:
    ```bash
    pip install -r requirements.txt
+   pip install setuptools djangorestframework-simplejwt
    ```
-
-3. Set up environment variables (create a .env file):
+7. create database using mysql(example):
+   ```bash
+   CREATE DATABASE campus_sphere CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   CREATE USER 'campus_user'@'localhost' IDENTIFIED BY 'campus_password';
+   GRANT ALL PRIVILEGES ON campus_sphere.* TO 'campus_user'@'localhost';
+   FLUSH PRIVILEGES;
    ```
-   DEBUG=True
-   SECRET_KEY=sphere
-   DB_NAME=campus_sphere
-   DB_USER=your-db-user
-   DB_PASSWORD=sphere
-   DB_HOST=localhost
-   ```
-
-4. Run migrations and create a superuser:
+8. Run migrations and create a superuser:
    ```bash
    python manage.py migrate
+   python manage.py makemigrations api
    python manage.py createsuperuser
    ```
 
-5. Start the development server:
+5. Start the development backend server:
    ```bash
    python manage.py runserver
    ```
@@ -120,7 +176,7 @@ Campus Sphere is a comprehensive campus management and social networking platfor
    npm install
    ```
 
-2. Set up environment variables (create .env.local file):
+2. Set up environment variables (create .env.local file in the frontend/ directory):
    ```
    REACT_APP_API_URL=http://localhost:8000/api
    ```

@@ -11,7 +11,6 @@ WORKDIR /app
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     build-essential \
-    default-libmysqlclient-dev \
     pkg-config \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
