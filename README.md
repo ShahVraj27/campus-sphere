@@ -106,9 +106,9 @@ Campus Sphere is a comprehensive campus management and social networking platfor
                   "forget to activate a virtual environment?"
             ) from exc
          execute_from_command_line(sys.argv)
-   ```
-if __name__ == '__main__':
-    main()
+
+   if __name__ == '__main__':
+      main()
    ```
 
 3. Create wsgi.py in backend/campus_sphere/ directory:
