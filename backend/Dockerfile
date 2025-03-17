@@ -23,7 +23,7 @@ RUN pip install --upgrade pip \
 
 # Create wait_for_db management command
 RUN mkdir -p /app/api/management/commands
-COPY wait_for_db.py /app/api/management/commands/wait_for_db.py
+COPY api/management/commands/wait_for_db.py /app/api/management/commands/wait_for_db.py
 RUN touch /app/api/management/__init__.py
 RUN touch /app/api/management/commands/__init__.py
 
