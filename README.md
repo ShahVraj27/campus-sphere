@@ -64,6 +64,7 @@ Campus Sphere is a comprehensive campus management and social networking platfor
    git clone https://github.com/yourusername/campus-sphere.git
    cd campus-sphere
    ```
+### Use docker for deployment or setup backend and frontend individually
 ### Setup using docker
 1. Start the application using Docker Compose:(Not Sure of its working)
    ```bash
