@@ -79,6 +79,19 @@ const Dashboard = () => {
   
   return (
     <Grid container spacing={3}>
+      {/* BITS Pilani Logo */}
+      <Grid item xs={12} sx={{ textAlign: 'left', mb: 2 }}>
+        <Box component="img" 
+             src="C:\Vraj\Academics\2-2\DBMS\trial\bits.png"
+             alt="BITS Pilani Logo"
+             sx={{ 
+               height: '80px', 
+               maxWidth: '100%',
+               mb: 2
+             }} 
+        />
+      </Grid>
+      
       {/* Welcome Card */}
       <Grid item xs={12}>
         <Paper
@@ -86,7 +99,7 @@ const Dashboard = () => {
             p: 3,
             display: 'flex',
             flexDirection: 'column',
-            bgcolor: 'primary.light',
+            bgcolor: '#8B0000',
             color: 'white',
             borderRadius: 2,
           }}
@@ -105,7 +118,7 @@ const Dashboard = () => {
         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flexGrow: 1 }}>
             <Box display="flex" alignItems="center" mb={2}>
-              <EventIcon color="primary" sx={{ mr: 1 }} />
+              <EventIcon sx={{ mr: 1, color: '#8B0000' }} />
               <Typography variant="h6" component="h2">
                 Upcoming Events
               </Typography>
@@ -138,6 +151,7 @@ const Dashboard = () => {
               component={RouterLink} 
               to="/events"
               endIcon={<EventIcon />}
+              sx={{ color: '#8B0000' }}
             >
               View All Events
             </Button>
@@ -150,7 +164,7 @@ const Dashboard = () => {
         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flexGrow: 1 }}>
             <Box display="flex" alignItems="center" mb={2}>
-              <PersonAddIcon color="primary" sx={{ mr: 1 }} />
+              <PersonAddIcon sx={{ mr: 1, color: '#8B0000' }} />
               <Typography variant="h6" component="h2">
                 Friend Requests
               </Typography>
@@ -170,8 +184,7 @@ const Dashboard = () => {
                     <Button 
                       size="small" 
                       variant="contained" 
-                      color="primary"
-                      sx={{ mr: 1 }}
+                      sx={{ mr: 1, bgcolor: '#8B0000', '&:hover': { bgcolor: '#A52A2A' } }}
                       onClick={() => friendService.acceptFriendRequest(request.id)}
                     >
                       Accept
@@ -199,6 +212,7 @@ const Dashboard = () => {
               component={RouterLink} 
               to="/friend-requests"
               endIcon={<PersonAddIcon />}
+              sx={{ color: '#8B0000' }}
             >
               View All Requests
             </Button>
@@ -211,7 +225,7 @@ const Dashboard = () => {
         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flexGrow: 1 }}>
             <Box display="flex" alignItems="center" mb={2}>
-              <SchoolIcon color="primary" sx={{ mr: 1 }} />
+              <SchoolIcon sx={{ mr: 1, color: '#8B0000' }} />
               <Typography variant="h6" component="h2">
                 My Courses
               </Typography>
@@ -241,6 +255,7 @@ const Dashboard = () => {
               component={RouterLink} 
               to="/courses"
               endIcon={<SchoolIcon />}
+              sx={{ color: '#8B0000' }}
             >
               View All Courses
             </Button>
@@ -253,7 +268,7 @@ const Dashboard = () => {
         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
           <CardContent sx={{ flexGrow: 1 }}>
             <Box display="flex" alignItems="center" mb={2}>
-              <GroupsIcon color="primary" sx={{ mr: 1 }} />
+              <GroupsIcon sx={{ mr: 1, color: '#8B0000' }} />
               <Typography variant="h6" component="h2">
                 My Clubs
               </Typography>
@@ -283,6 +298,7 @@ const Dashboard = () => {
               component={RouterLink} 
               to="/clubs"
               endIcon={<GroupsIcon />}
+              sx={{ color: '#8B0000' }}
             >
               View All Clubs
             </Button>

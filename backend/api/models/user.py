@@ -31,6 +31,15 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('user_type', 'developer')
         
         return self.create_user(id_no, email, name, password, **extra_fields)
+    
+    def create_maintainer(self, id_no, email, name, password=None, **extra_fields):
+        """
+        Creates and saves a new maintainer
+        """
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('user_type', 'maintainer')
+        
+        return self.create_user(id_no, email, name, password, **extra_fields)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
