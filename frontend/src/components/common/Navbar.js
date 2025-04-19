@@ -32,7 +32,6 @@ const navItems = [
   { path: '/clubs', label: 'Clubs', icon: <GroupsIcon /> },
   { path: '/events', label: 'Events', icon: <EventIcon /> },
   { path: '/friends', label: 'Friends', icon: <PeopleIcon /> },
-  { path: '/chats', label: 'Chats', icon: <ChatIcon /> },
 ];
 
 const adminItems = [
@@ -46,7 +45,15 @@ const Navbar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   
   // Determine active tab
-  const activeTab = navItems.findIndex(item => location.pathname.startsWith(item.path));
+  const activeTab = navItems.findIndex(item => {
+    if (item.path === '/') {
+      // For home path, require exact match
+      return location.pathname === '/';
+    } else {
+      // For other paths, use startsWith
+      return location.pathname.startsWith(item.path);
+    }
+  });
   
   // Combine with admin items if user is admin
   const allNavItems = isAdmin() ? [...navItems, ...adminItems] : navItems;

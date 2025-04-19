@@ -26,8 +26,6 @@ import Events from './pages/Events.js';
 import EventDetail from './pages/EventDetail.js';
 import Friends from './pages/Friends.js';
 import FriendRequests from './pages/FriendRequests.js';
-import Chats from './pages/Chats.js';
-import ChatDetail from './pages/ChatDetail.js';
 
 console.log({
   Header,
@@ -48,8 +46,6 @@ console.log({
   EventDetail,
   Friends,
   FriendRequests,
-  Chats,
-  ChatDetail
 });
 
 // Protected Route Component
@@ -154,18 +150,6 @@ function App() {
           <Route path="/friend-requests" element={
             <ProtectedRoute>
               <FriendRequests />
-            </ProtectedRoute>
-          } />
-          
-          <Route path="/chats" element={
-            <ProtectedRoute>
-              <Chats />
-            </ProtectedRoute>
-          } />
-          
-          <Route path="/chats/:chatId" element={
-            <ProtectedRoute>
-              <ChatDetail />
             </ProtectedRoute>
           } />
           
