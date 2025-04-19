@@ -11,7 +11,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
 } from '@mui/material';
 import {
   Home as HomeIcon,
@@ -19,11 +18,7 @@ import {
   Apartment as ApartmentIcon,
   Groups as GroupsIcon,
   Event as EventIcon,
-  People as PeopleIcon,
-  Chat as ChatIcon,
-  AdminPanelSettings as AdminIcon,
 } from '@mui/icons-material';
-import { useAuth } from '../../context/AuthContext';
 
 const navItems = [
   { path: '/', label: 'Home', icon: <HomeIcon /> },
@@ -31,17 +26,11 @@ const navItems = [
   { path: '/hostels', label: 'Hostels', icon: <ApartmentIcon /> },
   { path: '/clubs', label: 'Clubs', icon: <GroupsIcon /> },
   { path: '/events', label: 'Events', icon: <EventIcon /> },
-  { path: '/friends', label: 'Friends', icon: <PeopleIcon /> },
-];
-
-const adminItems = [
-  { path: '/admin', label: 'Admin', icon: <AdminIcon /> },
 ];
 
 const Navbar = () => {
   const location = useLocation();
   const theme = useTheme();
-  const { isAdmin } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   
   // Determine active tab
@@ -55,9 +44,6 @@ const Navbar = () => {
     }
   });
   
-  // Combine with admin items if user is admin
-  const allNavItems = isAdmin() ? [...navItems, ...adminItems] : navItems;
-  
   // For desktop: horizontal tabs
   const horizontalNav = (
     <Box sx={{ bgcolor: 'background.paper', boxShadow: 1 }}>
@@ -67,7 +53,7 @@ const Navbar = () => {
         scrollButtons="auto"
         sx={{ minHeight: 48 }}
       >
-        {allNavItems.map((item) => (
+        {navItems.map((item) => (
           <Tab
             key={item.path}
             label={item.label}
@@ -115,28 +101,6 @@ const Navbar = () => {
             </ListItem>
           ))}
         </List>
-        
-        {isAdmin() && (
-          <>
-            <Divider />
-            <List>
-              {adminItems.map((item) => (
-                <ListItem 
-                  key={item.path}
-                  component={RouterLink}
-                  to={item.path}
-                  button
-                  selected={location.pathname.startsWith(item.path)}
-                >
-                  <ListItemIcon>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={item.label} />
-                </ListItem>
-              ))}
-            </List>
-          </>
-        )}
       </Box>
     </Drawer>
   );

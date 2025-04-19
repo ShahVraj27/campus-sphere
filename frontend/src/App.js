@@ -24,8 +24,6 @@ import Clubs from './pages/Clubs.js';
 import ClubDetail from './pages/ClubDetail.js';
 import Events from './pages/Events.js';
 import EventDetail from './pages/EventDetail.js';
-import Friends from './pages/Friends.js';
-import FriendRequests from './pages/FriendRequests.js';
 
 console.log({
   Header,
@@ -44,8 +42,6 @@ console.log({
   ClubDetail,
   Events,
   EventDetail,
-  Friends,
-  FriendRequests,
 });
 
 // Protected Route Component
@@ -140,18 +136,7 @@ function App() {
               <EventDetail />
             </ProtectedRoute>
           } />
-          
-          <Route path="/friends" element={
-            <ProtectedRoute>
-              <Friends />
-            </ProtectedRoute>
-          } />
-          
-          <Route path="/friend-requests" element={
-            <ProtectedRoute>
-              <FriendRequests />
-            </ProtectedRoute>
-          } />
+      
           
           {/* Not Found Route */}
           <Route path="*" element={<NotFound />} />

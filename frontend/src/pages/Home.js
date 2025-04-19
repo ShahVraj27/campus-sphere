@@ -24,7 +24,7 @@ import { useAuth } from '../context/AuthContext';
 import courseService from '../services/course.service';
 import clubService from '../services/club.service';
 import eventService from '../services/event.service';
-import friendService from '../services/friend.service';
+import logoImage from '../assets/image.png';  // Adjust path to where your image is located
 
 // Dashboard component
 const Dashboard = () => {
@@ -33,7 +33,6 @@ const Dashboard = () => {
     courses: [],
     clubs: [],
     events: [],
-    friendRequests: [],
     loading: true,
   });
   
@@ -45,19 +44,16 @@ const Dashboard = () => {
           coursesResponse,
           clubsResponse,
           eventsResponse,
-          friendRequestsResponse,
         ] = await Promise.all([
           courseService.getAllCourses(),
           clubService.getUserClubs(),
           eventService.getAllEvents({ from_date: new Date().toISOString() }),
-          friendService.getReceivedFriendRequests(),
         ]);
         
         setData({
           courses: coursesResponse.data.slice(0, 3),
           clubs: clubsResponse.data.slice(0, 3),
           events: eventsResponse.data.slice(0, 3),
-          friendRequests: friendRequestsResponse.data.filter(req => req.status === 'pending'),
           loading: false,
         });
       } catch (error) {
@@ -79,17 +75,43 @@ const Dashboard = () => {
   
   return (
     <Grid container spacing={3}>
-      {/* BITS Pilani Logo */}
-      <Grid item xs={12} sx={{ textAlign: 'left', mb: 2 }}>
-        <Box component="img" 
-             src="C:\Vraj\Academics\2-2\DBMS\trial\bits.png"
-             alt="BITS Pilani Logo"
-             sx={{ 
-               height: '80px', 
-               maxWidth: '100%',
-               mb: 2
-             }} 
-        />
+      {/* Header with Logo and Title */}
+      <Grid item xs={12} sx={{ mb: 3 }}>
+        <Box 
+          sx={{ 
+            display: 'flex',
+            alignItems: 'center',
+            position: 'relative',
+            pb: 2
+          }}
+        >
+          {/* Logo on the left */}
+          <Box 
+            component="img" 
+            src={logoImage}
+            alt="BITS Pilani Logo"
+            sx={{ 
+              height: '60px',
+              width: 'auto',
+              position: 'absolute',
+              left: 0
+            }} 
+          />
+          
+          {/* Campus Sphere title in the middle */}
+          <Typography 
+            variant="h3" 
+            component="h1" 
+            sx={{ 
+              width: '100%',
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: '#8B0000'
+            }}
+          >
+            Campus Sphere
+          </Typography>
+        </Box>
       </Grid>
       
       {/* Welcome Card */}
@@ -108,7 +130,7 @@ const Dashboard = () => {
             Welcome back, {user?.name || 'User'}!
           </Typography>
           <Typography variant="body1">
-            Stay connected with your campus community. Check out the latest events, manage your courses, and connect with friends.
+            Stay connected with your campus community. Check out the latest events, manage your courses, explore new clubs.
           </Typography>
         </Paper>
       </Grid>
@@ -158,68 +180,7 @@ const Dashboard = () => {
           </CardActions>
         </Card>
       </Grid>
-      
-      {/* Friend Requests */}
-      <Grid item xs={12} md={6}>
-        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-          <CardContent sx={{ flexGrow: 1 }}>
-            <Box display="flex" alignItems="center" mb={2}>
-              <PersonAddIcon sx={{ mr: 1, color: '#8B0000' }} />
-              <Typography variant="h6" component="h2">
-                Friend Requests
-              </Typography>
-            </Box>
-            <Divider sx={{ mb: 2 }} />
-            
-            {data.friendRequests.length > 0 ? (
-              data.friendRequests.map((request) => (
-                <Box key={request.id} mb={2}>
-                  <Typography variant="subtitle1" component="h3">
-                    {request.sender.name}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" gutterBottom>
-                    ID: {request.sender.id_no}
-                  </Typography>
-                  <Box>
-                    <Button 
-                      size="small" 
-                      variant="contained" 
-                      sx={{ mr: 1, bgcolor: '#8B0000', '&:hover': { bgcolor: '#A52A2A' } }}
-                      onClick={() => friendService.acceptFriendRequest(request.id)}
-                    >
-                      Accept
-                    </Button>
-                    <Button 
-                      size="small" 
-                      variant="outlined" 
-                      color="error"
-                      onClick={() => friendService.rejectFriendRequest(request.id)}
-                    >
-                      Decline
-                    </Button>
-                  </Box>
-                </Box>
-              ))
-            ) : (
-              <Typography variant="body1" color="text.secondary">
-                No pending friend requests.
-              </Typography>
-            )}
-          </CardContent>
-          <CardActions>
-            <Button 
-              size="small" 
-              component={RouterLink} 
-              to="/friend-requests"
-              endIcon={<PersonAddIcon />}
-              sx={{ color: '#8B0000' }}
-            >
-              View All Requests
-            </Button>
-          </CardActions>
-        </Card>
-      </Grid>
-      
+    
       {/* My Courses */}
       <Grid item xs={12} md={6}>
         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
