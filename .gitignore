@@ -1,0 +1,17 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+.vscode/
+# Ignore Django migrations
+**/migrations/
+!**/migrations/__init__.py
+.env
+
+# Node.js dependencies
+node_modules/
+package-lock.json
+.DS_Store
